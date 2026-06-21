@@ -66,7 +66,9 @@ def extract_info(url, profile_path, download=False):
     # Add node.js path for JavaScript challenges
     local_node = node_path()
     if os.path.exists(local_node):
-        cmd.extend(['--exec-cmd', f'node:{local_node}'])
+        cmd.extend(['--js-runtimes', f'node:{local_node}'])
+    else:
+        raise FileNotFoundError(f"node.exe not found at: {local_node}. Application installation may be corrupted.")
     
     # Add ffmpeg location
     ffmpeg_location = ffmpeg_dir()
@@ -129,7 +131,9 @@ def download_video(url, profile_path, output_template, format_spec, progress_cal
     # Add node.js path for JavaScript challenges
     local_node = node_path()
     if os.path.exists(local_node):
-        cmd.extend(['--exec-cmd', f'node:{local_node}'])
+        cmd.extend(['--js-runtimes', f'node:{local_node}'])
+    else:
+        raise FileNotFoundError(f"node.exe not found at: {local_node}. Application installation may be corrupted.")
     
     # Add ffmpeg location
     ffmpeg_location = ffmpeg_dir()
@@ -211,7 +215,9 @@ def download_audio(url, profile_path, output_template, progress_callback=None):
     # Add node.js path for JavaScript challenges
     local_node = node_path()
     if os.path.exists(local_node):
-        cmd.extend(['--exec-cmd', f'node:{local_node}'])
+        cmd.extend(['--js-runtimes', f'node:{local_node}'])
+    else:
+        raise FileNotFoundError(f"node.exe not found at: {local_node}. Application installation may be corrupted.")
     
     # Add ffmpeg location
     ffmpeg_location = ffmpeg_dir()
