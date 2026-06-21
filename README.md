@@ -9,9 +9,9 @@
 **For regular users (no Python required):**
 
 1. Go to [Releases](../../releases)
-2. Download `VideoExtractorByParallaXYZ-Windows-x64.zip`
+2. Download `Video Extractor By ParallaXYZ.exe.zip`
 3. Extract the archive
-4. Run `VideoExtractorByParallaXYZ.exe`
+4. Run `Video Extractor By ParallaXYZ.exe`
 
 ### 💻 Run from Source Code
 
@@ -60,7 +60,7 @@ The build script will automatically:
 3. Build the executable with PyInstaller
 4. Create release package in `release/` folder
 
-The executable will be created in `dist\VideoExtractorByParallaXYZ.exe`
+The executable will be created in `dist\Video Extractor By ParallaXYZ.exe.exe`
 
 ## 📖 Main Features
 
