@@ -74,13 +74,22 @@ User is solely responsible for:
 
 ## 📋 Additional Terms
 
-### Third-Party Libraries
+### Third-Party Components
 
-This application uses the following libraries with their own licenses:
+This application uses the following third-party components:
 
-- **PyQt5** - GPL v3
-- **yt-dlp** - Unlicense
-- **FFmpeg** - LGPL v2.1+
+**Python Libraries:**
+- **PyQt5** - GPL v3 License
+
+**External Binaries (distributed separately):**
+- **yt-dlp** - Unlicense (Public Domain)
+  - https://github.com/yt-dlp/yt-dlp
+- **FFmpeg** - LGPL v2.1+ License
+  - https://github.com/GyanD/codexffmpeg
+- **Node.js** - MIT License
+  - https://nodejs.org
+
+These binaries are automatically downloaded during build process and are not embedded in the source code. Each component retains its original license.
 
 Ensure you comply with these licenses if you obtain commercial permission.
 
