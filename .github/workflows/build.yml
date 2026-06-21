@@ -1,0 +1,74 @@
+name: Build Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Build with PyInstaller
+      run: |
+        pyinstaller VideoExtractorByParallaXYZ.spec
+    
+    - name: Create release archive
+      run: |
+        mkdir release-files
+        Copy-Item "dist\VideoExtractorByParallaXYZ.exe" -Destination "release-files\"
+        Copy-Item "README.md" -Destination "release-files\"
+        Copy-Item "LICENSE.md" -Destination "release-files\"
+        Compress-Archive -Path "release-files\*" -DestinationPath "VideoExtractorByParallaXYZ-Windows-x64.zip"
+      shell: pwsh
+    
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: VideoExtractorByParallaXYZ-Windows-x64
+        path: VideoExtractorByParallaXYZ-Windows-x64.zip
+    
+    - name: Create Release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: VideoExtractorByParallaXYZ-Windows-x64.zip
+        body: |
+          ## Video extractor by ParallaXYZ Release
+          
+          ### 📦 Download
+          - **VideoExtractorByParallaXYZ-Windows-x64.zip** - Ready-to-use application for Windows
+          
+          ### 🚀 Installation
+          1. Download the ZIP file
+          2. Extract to any folder
+          3. Run `VideoExtractorByParallaXYZ.exe`
+          
+          ### ✨ Features
+          - Download videos from YouTube (all formats including 4K)
+          - Convert local video files
+          - Bilingual interface (English/Russian)
+          - No Python installation required
+          
+          ### 📋 Requirements
+          - Windows 10/11
+          - Microsoft Edge (for YouTube authorization)
+          
+          See [README.md](https://github.com/${{ github.repository }}/blob/main/README.md) for detailed instructions.
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
